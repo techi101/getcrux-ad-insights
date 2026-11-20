@@ -1,5 +1,11 @@
 # What a creative is worth, on real ad data
 
+![Creative Insights dashboard](demo/screenshots/dashboard_1440.png)
+
+**Problem:** before an AI creative strategist automates anything, it needs to know how much of an ad's CTR is the creative, when a winner can be trusted, and what moving budget is worth.
+**Result:** on millions of real ad logs, most of the CTR spread is the product, not the creative. Early leaders keep winning only about half the time. Shifting budget gradually beats locking in a winner.
+**Try it:** open `demo/index.html` in a browser; no install. A live link will be added once it is deployed.
+
 Three questions an AI creative strategist has to answer before it automates anything:
 1. How much of an ad's click-through rate (CTR) is the creative, and how much is the product or audience behind it?
 2. How early can you call a winning creative?
@@ -62,5 +68,6 @@ This is the shape of a guided weekly summary that does not cry wolf.
 # data/test_data_list.txt from https://huggingface.co/datasets/Evan12/CreativeRanking (243 MB)
 python analysis.py        # about 30 s on a laptop; writes out/results.json and out/weekly_summary_example.md
 python -m pytest -q       # 6 tests on synthetic data where the right answer is known
+python export_dashboard.py   # writes demo/data.js for the dashboard
 ```
 pandas, numpy, pyarrow, pytest.

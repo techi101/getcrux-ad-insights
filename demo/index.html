@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creative Insights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#e5e7eb;--brand:#4f46e5;--brand-soft:#eef2ff;--good:#059669;--bad:#dc2626;--bad-soft:#fef2f2;--grey:#cbd5e1}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45}
+.top{height:56px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 20px;position:sticky;top:0;z-index:5}
+.logo{width:28px;height:28px;border-radius:8px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700}
+.top b{font-size:15px}.pill{margin-left:auto;font-size:12px;color:var(--muted);background:#f1f5f9;border:1px solid var(--line);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.wrap{display:flex}
+nav{width:216px;flex:none;padding:18px 12px;border-right:1px solid var(--line);background:#fff;height:calc(100vh - 56px);position:sticky;top:56px;align-self:flex-start}
+.wrap{background:linear-gradient(90deg,#fff 216px,transparent 216px)}
+nav a{display:block;padding:8px 10px;border-radius:8px;color:#334155;text-decoration:none;font-weight:500;margin-bottom:2px}
+nav a:hover,nav a.on{background:var(--brand-soft);color:var(--brand)}
+nav small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin:4px 10px 8px}
+main{flex:1;min-width:0;padding:24px;max-width:1180px}
+h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 20px;max-width:760px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .l{font-size:12px;color:var(--muted);font-weight:500}.kpi .v{font-size:24px;font-weight:700;margin-top:4px}.kpi .h{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
+.card h2{font-size:15px;margin:0 0 2px}.card .q{color:var(--muted);font-size:13px;margin:0 0 14px}
+.take{margin-top:12px;padding:10px 12px;background:var(--brand-soft);border-radius:8px;color:#312e81;font-size:13px}
+.row{display:grid;grid-template-columns:76px 1fr 64px;align-items:center;gap:10px;margin:9px 0}
+.thumb{display:flex;align-items:center;gap:8px;font-size:12px;color:#334155;font-family:ui-monospace,monospace}
+.sw{width:22px;height:22px;border-radius:6px;flex:none}
+.track{position:relative;height:22px;background:#f1f5f9;border-radius:6px}
+.bar{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--brand)}
+.ci{position:absolute;top:5px;bottom:5px;border-left:2px solid #1e1b4b;border-right:2px solid #1e1b4b;opacity:.55}
+.ci:after{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px solid #1e1b4b}
+.num{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.legend{font-size:12px;color:var(--muted);margin-top:6px}
+.split{display:flex;height:34px;border-radius:8px;overflow:hidden;margin:6px 0 8px}
+.split div{display:flex;align-items:center;padding:0 10px;color:#fff;font-weight:600;font-size:13px;white-space:nowrap}
+.keys{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)}.keys i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+svg text{font-family:Inter,system-ui,sans-serif}
+.alert{border:1px solid #fecaca;background:var(--bad-soft);border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
+.alert .dot{width:10px;height:10px;border-radius:50%;background:var(--bad);margin-top:5px;flex:none}
+.alert b{display:block}.alert span{color:#7f1d1d;font-size:13px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:500;font-size:12px}td.n{text-align:right;font-variant-numeric:tabular-nums}
+.tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px}.tag.ok{background:#ecfdf5;color:var(--good)}.tag.bad{background:#fee2e2;color:var(--bad)}
+.notes{margin-top:16px}.notes li{margin:6px 0;color:#334155}
+details summary{cursor:pointer;color:var(--brand);font-weight:600;margin-top:10px}
+footer{color:var(--muted);font-size:12px;margin:22px 0 8px}
+@media (max-width:980px){nav{display:none}.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.hide-m{display:none}th,td{padding:8px 4px}main{padding:16px}.top{padding:0 16px}.pill{display:none}.row{grid-template-columns:66px 1fr 56px;gap:8px}.kpi .v{font-size:20px}h1{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">C</div><b>Creative Insights</b><span class="pill">Data: Alibaba CreativeRanking · 15 days · public, Apache-2.0</span></div>
+<div class="wrap">
+<nav>
+  <small>Report</small>
+  <a href="#overview" class="on">Overview</a>
+  <a href="#adset">Same product, different creatives</a>
+  <a href="#source">Creative or product?</a>
+  <a href="#winner">Calling a winner</a>
+  <a href="#budget">Shifting budget</a>
+  <a href="#weekly">Weekly alerts</a>
+  <a href="#limits">Limits</a>
+</nav>
+<main>
+  <section id="overview">
+    <h1>What a creative is worth</h1>
+    <p class="sub">Three questions to answer before automating creative decisions, checked on millions of real daily ad logs where every product ran several creatives at the same time.</p>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <div class="grid">
+    <section class="card" id="adset">
+      <h2>Same product, different creatives</h2>
+      <p class="q">Click-through rate (CTR) of each creative for the busiest product, over 15 days. The whiskers show the 95% range.</p>
+      <div id="adsetRows"></div>
+      <div class="legend" id="adsetLegend"></div>
+      <div class="take" id="adsetTake"></div>
+    </section>
+
+    <section class="card" id="source">
+      <h2>Is it the creative or the product?</h2>
+      <p class="q">Where the CTR differences between creatives come from, after removing random noise.</p>
+      <div class="split" id="split"></div>
+      <div class="keys"><span><i style="background:#94a3b8"></i>Product behind the ad</span><span><i style="background:var(--brand)"></i>The creative itself</span></div>
+      <div class="take">A model that learns "this visual feature wins" across products mostly learns which products sell. Compare creatives <b>within the same ad set</b>.</div>
+      <details><summary>How this was measured</summary><p class="q" id="splitHow" style="margin-top:8px"></p></details>
+    </section>
+
+    <section class="card" id="winner">
+      <h2>Can you call a winner early?</h2>
+      <p class="q">How often the creative leading after the first days also wins the later, unseen days.</p>
+      <div id="winnerChart"></div>
+      <div class="keys"><span><i style="background:var(--brand)"></i>Early leader also wins later</span><span><i style="background:#f59e0b"></i>Accuracy when a Bayesian test is "95% sure"</span><span><i style="background:#cbd5e1"></i>Chance</span></div>
+      <div class="take" id="winnerTake"></div>
+    </section>
+
+    <section class="card" id="budget">
+      <h2>What shifting budget is worth</h2>
+      <p class="q">Clicks earned, as a share of always showing the true best creative (simulation, 200 impressions a day for 15 days).</p>
+      <div id="budgetRows"></div>
+      <div class="take" id="budgetTake"></div>
+    </section>
+
+    <section class="card" id="weekly" style="grid-column:1/-1">
+      <h2>Weekly summary</h2>
+      <p class="q" id="weeklyQ"></p>
+      <div id="alertBox"></div>
+      <div style="overflow-x:auto"><table><thead><tr><th>Creative</th><th class="n" style="text-align:right">CTR week 1</th><th style="text-align:right">CTR week 2</th><th class="hide-m" style="text-align:right">Impressions (week 2)</th><th style="text-align:right">z</th><th>Status</th></tr></thead><tbody id="weeklyRows"></tbody></table></div>
+    </section>
+  </div>
+
+  <section class="card notes" id="limits">
+    <h2>Limits, stated plainly</h2>
+    <ul>
+      <li><b>Spend confounding.</b> In this dataset impressions were not steered by performance (rank correlation between impressions and CTR is about zero). On Meta, Google and TikTok the delivery algorithm does push spend toward ads it expects to win, so a naive "feature → performance" model is confounded by spend. The fix is the same as above: compare inside the same ad set and time window, and confirm with a holdout.</li>
+      <li><b>The budget numbers are a simulation</b> that assumes each creative's CTR is fixed. The "calling a winner" chart shows CTRs drift, so real gains would likely be smaller.</li>
+      <li><b>No image features yet.</b> The creative images are a 115 GB archive; this report uses the performance logs only.</li>
+      <li><b>Domain:</b> e-commerce display ads, not video ads for US apps. The methods carry over; the exact numbers will not.</li>
+    </ul>
+  </section>
+  <footer>Built by Nitesh Kumar Yadav. Every number on this page is computed by analysis.py and export_dashboard.py in the repo from the public CreativeRanking test split (Hybrid Bandit Model with Visual Priors for Creative Ranking in Display Advertising, WWW 2021).</footer>
+</main>
+</div>
+<script src="data.js"></script>
+<script>
+const D = window.DATA, pct = (x, d = 1) => (x * 100).toFixed(d) + '%', fmt = n => n.toLocaleString('en-US');
+const COLORS = ['#4f46e5', '#0ea5e9', '#14b8a6', '#f59e0b', '#ec4899', '#8b5cf6'];
+// KPIs
+const vs = D.variance_split;
+document.getElementById('kpis').innerHTML = [
+  ['Products', fmt(D.summary.products), 'each running 3 or more creatives'],
+  ['Product–creative pairs', fmt(D.summary.creatives), 'from ' + fmt(D.summary.rows) + ' daily rows'],
+  ['Average CTR', pct(D.summary.overall_ctr, 2), 'clicks ÷ impressions'],
+  ['CTR spread due to the creative', pct(vs.share_within_product_creative, 0), 'the rest is the product'],
+].map(([l, v, h]) => `<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="h">${h}</div></div>`).join('');
+// ad set rows
+const cr = D.adset.creatives, max = Math.max(...cr.map(c => c.hi)) * 1.08;
+document.getElementById('adsetRows').innerHTML = cr.map((c, i) => `<div class="row">
+  <div class="thumb"><span class="sw" style="background:${COLORS[i % COLORS.length]}"></span>${c.id.slice(0, 5)}</div>
+  <div class="track" title="${fmt(c.imp)} impressions, ${fmt(c.clk)} clicks"><div class="bar" style="width:${c.ctr / max * 100}%;background:${COLORS[i % COLORS.length]}"></div>
+  <div class="ci" style="left:${c.lo / max * 100}%;width:${(c.hi - c.lo) / max * 100}%"></div></div>
+  <div class="num">${pct(c.ctr, 2)}</div></div>`).join('');
+const best = cr[0], worst = cr[cr.length - 1];
+document.getElementById('adsetLegend').textContent = `Product ${D.adset.product} · about ${fmt(Math.round(cr.reduce((a, c) => a + c.imp, 0) / cr.length / 100) * 100)} impressions per creative`;
+document.getElementById('adsetTake').innerHTML = `Same product, same days: the best creative's CTR is <b>${(best.ctr / worst.ctr).toFixed(1)}×</b> the worst (${pct(best.ctr, 2)} vs ${pct(worst.ctr, 2)}). Within an ad set, the creative matters a lot.`;
+// split
+const sb = vs.share_between_product, sw = vs.share_within_product_creative;
+document.getElementById('split').innerHTML = `<div style="width:${sb * 100}%;background:#94a3b8">Product ${pct(sb, 0)}</div><div style="width:${sw * 100}%;background:var(--brand)">Creative ${pct(sw, 0)}</div>`;
+document.getElementById('splitHow').textContent = `${fmt(vs.creatives)} creatives with at least ${vs.min_imp} impressions, across ${fmt(vs.products)} products. CTR variance is split into between-product and within-product parts, and the expected binomial noise is subtracted from the within-product part so randomness is not counted as a creative effect.`;
+// winner chart (SVG)
+(function () {
+  const rows = D.early_call.by_day, narrow = innerWidth < 520, W = narrow ? 340 : 520, H = narrow ? 240 : 230, L = 52, R = 22, T = 22, B = 34;
+  const xs = rows.map(r => r.days_observed), xmax = Math.max(...xs);
+  const X = d => L + 24 + (d - 1) / (xmax - 1) * (W - L - R - 24), Y = v => T + (1 - v) * (H - T - B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Early leader accuracy by days observed">`;
+  [0, .25, .5, .75, 1].forEach(v => s += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#eef0f3"/><text x="${L - 6}" y="${Y(v) + 4}" font-size="11" fill="#64748b" text-anchor="end">${v * 100}%</text>`);
+  xs.forEach(d => s += `<text x="${X(d)}" y="${H - 14}" font-size="11" fill="#64748b" text-anchor="middle">${d}d</text>`);
+  s += `<text x="${(W + L) / 2}" y="${H - 1}" font-size="11" fill="#64748b" text-anchor="middle">days of data before calling</text>`;
+  const ch = D.early_call.chance_level;
+  s += `<line x1="${L}" x2="${W - R}" y1="${Y(ch)}" y2="${Y(ch)}" stroke="#cbd5e1" stroke-dasharray="5 4" stroke-width="2"/><text x="${W - R}" y="${Y(ch) - 6}" font-size="11" fill="#94a3b8" text-anchor="end">chance ${pct(ch, 0)}</text>`;
+  const line = (key, col) => { const pts = rows.filter(r => r[key] != null).map(r => [X(r.days_observed), Y(r[key]), r[key]]);
+    s += `<polyline fill="none" stroke="${col}" stroke-width="2.5" points="${pts.map(p => p[0] + ',' + p[1]).join(' ')}"/>`;
+    pts.forEach(p => s += `<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="#fff" stroke="${col}" stroke-width="2.5"/><text x="${p[0]}" y="${p[1] - 9}" font-size="11" font-weight="600" fill="${col}" text-anchor="middle">${pct(p[2], 0)}</text>`); };
+  line('precision_when_called', '#f59e0b'); line('leader_wins_later_days', '#4f46e5');
+  document.getElementById('winnerChart').innerHTML = s + '</svg>';
+  const last = rows[rows.length - 1];
+  document.getElementById('winnerTake').innerHTML = `Even after <b>${last.days_observed} days</b>, the leader wins the following days only <b>${pct(last.leader_wins_later_days, 0)}</b> of the time, and "95% sure" calls are right <b>${pct(last.precision_when_called, 0)}</b>. CTRs drift, so re-test winners instead of locking them in. (${fmt(D.early_call.products)} products with 3,000+ impressions.)`;
+})();
+// budget
+const bs = D.budget_sim.clicks_vs_oracle, names = [['uniform', 'Even split'], ['greedy_after_day1', 'Pick the day-1 leader'], ['thompson', 'Shift budget daily (Thompson sampling)']];
+document.getElementById('budgetRows').innerHTML = names.map(([k, n], i) => `<div style="margin:12px 0"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span>${n}</span><b>${pct(bs[k], 0)}</b></div>
+  <div class="track" style="height:14px"><div class="bar" style="width:${bs[k] * 100}%;background:${i == 2 ? 'var(--brand)' : '#94a3b8'}"></div></div></div>`).join('');
+const lift = D.budget_sim.lift_vs_uniform;
+document.getElementById('budgetTake').innerHTML = `Moving budget a little every day earns <b>+${pct(lift.thompson, 0)}</b> clicks over an even split, versus +${pct(lift.greedy_after_day1, 0)} for picking an early winner. Simulated on ${fmt(D.budget_sim.products)} products; creative CTRs shrunk toward their product average to remove noise.`;
+// weekly
+const wr = D.weekly.rows, al = wr.filter(r => r.alert);
+document.getElementById('weeklyQ').textContent = `Product ${D.weekly.product}: week 1 (days 1–7) vs week 2 (days 8–14). An alert fires only when a change is bigger than random noise (|z| ≥ 2.5).`;
+document.getElementById('alertBox').innerHTML = al.length ? al.map(r => `<div class="alert"><span class="dot"></span><div><b>Creative ${r.id.slice(0, 5)}: CTR ${r.z < 0 ? 'fell' : 'rose'} from ${pct(r.ctr_w1, 2)} to ${pct(r.ctr_w2, 2)}</b><span>That is ${Math.abs(r.z).toFixed(1)}× the size of normal week-to-week noise on ${fmt(r.imp_w2)} impressions. Check for creative fatigue before shifting more budget to it.</span></div></div>`).join('') : '<div class="take">No alerts this week: all changes were within noise.</div>';
+document.getElementById('weeklyRows').innerHTML = wr.map(r => `<tr><td><span class="sw" style="display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:6px;background:#94a3b8"></span>${r.id.slice(0, 5)}</td>
+  <td class="n">${pct(r.ctr_w1, 2)}</td><td class="n">${pct(r.ctr_w2, 2)}</td><td class="n hide-m">${fmt(r.imp_w2)}</td><td class="n">${r.z.toFixed(1)}</td>
+  <td>${r.alert ? '<span class="tag bad">Alert</span>' : '<span class="tag ok">Within noise</span>'}</td></tr>`).join('');
+// nav highlight
+const links = [...document.querySelectorAll('nav a')];
+addEventListener('scroll', () => { let cur = links[0]; links.forEach(a => { const el = document.querySelector(a.getAttribute('href')); if (el && el.getBoundingClientRect().top < 120) cur = a; }); links.forEach(a => a.classList.toggle('on', a === cur)); });
+</script>
+</body>
+</html>
