@@ -1,0 +1,91 @@
+{
+  "rows": 3180146,
+  "products": 100345,
+  "creatives": 340906,
+  "overall_ctr": 0.029651962852408564,
+  "variance_split": {
+    "creatives": 12568,
+    "products": 3301,
+    "min_imp": 500,
+    "total_var": 0.00026310234147032514,
+    "between_product_var": 0.0001465221253444974,
+    "within_product_var_raw": 0.00011655928182112765,
+    "sampling_noise_var": 3.3767790616326785e-05,
+    "within_product_var_after_noise": 8.279149120480087e-05,
+    "share_between_product": 0.638959550459132,
+    "share_within_product_creative": 0.361040449540868
+  },
+  "confounding": {
+    "pooled_spearman_imp_ctr": -0.04499552053937622,
+    "mean_within_product_spearman": -0.04614685336828297,
+    "products": 3076,
+    "most_shown_is_best_ctr_share": 0.25097529258777634,
+    "chance_level_for_3plus_creatives": 0.2691537917724524
+  },
+  "early_call": {
+    "min_total_imp": 3000,
+    "products": 1760,
+    "chance_level": 0.24203801406926412,
+    "by_day": [
+      {
+        "days_observed": 1,
+        "products": 1760,
+        "leader_wins_later_days": 0.41704545454545455,
+        "share_callable_at_95": 0.022727272727272728,
+        "precision_when_called": 0.925,
+        "median_imp_per_creative": 65.0
+      },
+      {
+        "days_observed": 2,
+        "products": 1760,
+        "leader_wins_later_days": 0.45,
+        "share_callable_at_95": 0.060227272727272727,
+        "precision_when_called": 0.8490566037735849,
+        "median_imp_per_creative": 144.0
+      },
+      {
+        "days_observed": 3,
+        "products": 1760,
+        "leader_wins_later_days": 0.48125,
+        "share_callable_at_95": 0.08863636363636364,
+        "precision_when_called": 0.8525641025641025,
+        "median_imp_per_creative": 225.0
+      },
+      {
+        "days_observed": 4,
+        "products": 1760,
+        "leader_wins_later_days": 0.5113636363636364,
+        "share_callable_at_95": 0.10909090909090909,
+        "precision_when_called": 0.8802083333333334,
+        "median_imp_per_creative": 310.0
+      },
+      {
+        "days_observed": 7,
+        "products": 1760,
+        "leader_wins_later_days": 0.5056818181818182,
+        "share_callable_at_95": 0.17045454545454544,
+        "precision_when_called": 0.8166666666666667,
+        "median_imp_per_creative": 574.0
+      }
+    ]
+  },
+  "budget_sim": {
+    "products": 1760,
+    "daily_impressions": 200,
+    "days": 15,
+    "reps": 3,
+    "clicks_vs_oracle": {
+      "uniform": 0.7533306649233081,
+      "greedy_after_day1": 0.8265811619329794,
+      "thompson": 0.8708725385635456,
+      "oracle": 1.0
+    },
+    "lift_vs_uniform": {
+      "uniform": 0.0,
+      "greedy_after_day1": 0.09723551744323111,
+      "thompson": 0.15602958848383475,
+      "oracle": 0.32743833028727654
+    },
+    "shrink_factor": 0.7102951383301506
+  }
+}
