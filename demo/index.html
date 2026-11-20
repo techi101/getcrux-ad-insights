@@ -44,14 +44,14 @@ svg text{font-family:Inter,system-ui,sans-serif}
 .alert{border:1px solid #fecaca;background:var(--bad-soft);border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
 .alert .dot{width:10px;height:10px;border-radius:50%;background:var(--bad);margin-top:5px;flex:none}
 .alert b{display:block}.alert span{color:#7f1d1d;font-size:13px}
-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
 th{color:var(--muted);font-weight:500;font-size:12px}td.n{text-align:right;font-variant-numeric:tabular-nums}
 .tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px}.tag.ok{background:#ecfdf5;color:var(--good)}.tag.bad{background:#fee2e2;color:var(--bad)}
 .notes{margin-top:16px}.notes li{margin:6px 0;color:#334155}
 details summary{cursor:pointer;color:var(--brand);font-weight:600;margin-top:10px}
 footer{color:var(--muted);font-size:12px;margin:22px 0 8px}
 @media (max-width:980px){nav{display:none}.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.hide-m{display:none}th,td{padding:8px 4px}main{padding:16px}.top{padding:0 16px}.pill{display:none}.row{grid-template-columns:66px 1fr 56px;gap:8px}.kpi .v{font-size:20px}h1{font-size:19px}}
+@media (max-width:520px){.hide-m{display:none}th,td{padding:8px 3px}main{padding:16px}.top{padding:0 16px}.pill{display:none}.row{grid-template-columns:66px 1fr 56px;gap:8px}.kpi .v{font-size:20px}h1{font-size:19px}}
 </style>
 </head>
 <body>
@@ -111,7 +111,7 @@ footer{color:var(--muted);font-size:12px;margin:22px 0 8px}
       <h2>Weekly summary</h2>
       <p class="q" id="weeklyQ"></p>
       <div id="alertBox"></div>
-      <div style="overflow-x:auto"><table><thead><tr><th>Creative</th><th class="n" style="text-align:right">CTR week 1</th><th style="text-align:right">CTR week 2</th><th class="hide-m" style="text-align:right">Impressions (week 2)</th><th style="text-align:right">z</th><th>Status</th></tr></thead><tbody id="weeklyRows"></tbody></table></div>
+      <div style="overflow-x:auto"><table><thead><tr><th>Creative</th><th class="n" style="text-align:right"><span class="hide-m">CTR </span>week 1</th><th style="text-align:right"><span class="hide-m">CTR </span>week 2</th><th class="hide-m" style="text-align:right">Impressions (week 2)</th><th style="text-align:right">z</th><th>Status</th></tr></thead><tbody id="weeklyRows"></tbody></table></div>
     </section>
   </div>
 
@@ -155,13 +155,13 @@ document.getElementById('split').innerHTML = `<div style="width:${sb * 100}%;bac
 document.getElementById('splitHow').textContent = `${fmt(vs.creatives)} creatives with at least ${vs.min_imp} impressions, across ${fmt(vs.products)} products. CTR variance is split into between-product and within-product parts, and the expected binomial noise is subtracted from the within-product part so randomness is not counted as a creative effect.`;
 // winner chart (SVG)
 (function () {
-  const rows = D.early_call.by_day, narrow = innerWidth < 520, W = narrow ? 340 : 520, H = narrow ? 240 : 230, L = 52, R = 22, T = 22, B = 34;
+  const rows = D.early_call.by_day, narrow = innerWidth < 520, W = narrow ? 340 : 520, H = narrow ? 252 : 230, L = 52, R = 22, T = 22, B = narrow ? 46 : 34;
   const xs = rows.map(r => r.days_observed), xmax = Math.max(...xs);
   const X = d => L + 24 + (d - 1) / (xmax - 1) * (W - L - R - 24), Y = v => T + (1 - v) * (H - T - B);
   let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Early leader accuracy by days observed">`;
   [0, .25, .5, .75, 1].forEach(v => s += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#eef0f3"/><text x="${L - 6}" y="${Y(v) + 4}" font-size="11" fill="#64748b" text-anchor="end">${v * 100}%</text>`);
-  xs.forEach(d => s += `<text x="${X(d)}" y="${H - 14}" font-size="11" fill="#64748b" text-anchor="middle">${d}d</text>`);
-  s += `<text x="${(W + L) / 2}" y="${H - 1}" font-size="11" fill="#64748b" text-anchor="middle">days of data before calling</text>`;
+  xs.forEach(d => s += `<text x="${X(d)}" y="${Y(0) + 16}" font-size="11" fill="#64748b" text-anchor="middle">${d}d</text>`);
+  s += `<text x="${(W + L) / 2}" y="${Y(0) + 34}" font-size="11" fill="#64748b" text-anchor="middle">days of data before calling</text>`;
   const ch = D.early_call.chance_level;
   s += `<line x1="${L}" x2="${W - R}" y1="${Y(ch)}" y2="${Y(ch)}" stroke="#cbd5e1" stroke-dasharray="5 4" stroke-width="2"/><text x="${W - R}" y="${Y(ch) - 6}" font-size="11" fill="#94a3b8" text-anchor="end">chance ${pct(ch, 0)}</text>`;
   const line = (key, col) => { const pts = rows.filter(r => r[key] != null).map(r => [X(r.days_observed), Y(r[key]), r[key]]);
@@ -184,7 +184,7 @@ document.getElementById('weeklyQ').textContent = `Product ${D.weekly.product}: w
 document.getElementById('alertBox').innerHTML = al.length ? al.map(r => `<div class="alert"><span class="dot"></span><div><b>Creative ${r.id.slice(0, 5)}: CTR ${r.z < 0 ? 'fell' : 'rose'} from ${pct(r.ctr_w1, 2)} to ${pct(r.ctr_w2, 2)}</b><span>That is ${Math.abs(r.z).toFixed(1)}× the size of normal week-to-week noise on ${fmt(r.imp_w2)} impressions. Check for creative fatigue before shifting more budget to it.</span></div></div>`).join('') : '<div class="take">No alerts this week: all changes were within noise.</div>';
 document.getElementById('weeklyRows').innerHTML = wr.map(r => `<tr><td><span class="sw" style="display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:6px;background:#94a3b8"></span>${r.id.slice(0, 5)}</td>
   <td class="n">${pct(r.ctr_w1, 2)}</td><td class="n">${pct(r.ctr_w2, 2)}</td><td class="n hide-m">${fmt(r.imp_w2)}</td><td class="n">${r.z.toFixed(1)}</td>
-  <td>${r.alert ? '<span class="tag bad">Alert</span>' : '<span class="tag ok">Within noise</span>'}</td></tr>`).join('');
+  <td>${r.alert ? '<span class="tag bad">Alert</span>' : '<span class="tag ok">Normal</span>'}</td></tr>`).join('');
 // nav highlight
 const links = [...document.querySelectorAll('nav a')];
 addEventListener('scroll', () => { let cur = links[0]; links.forEach(a => { const el = document.querySelector(a.getAttribute('href')); if (el && el.getBoundingClientRect().top < 120) cur = a; }); links.forEach(a => a.classList.toggle('on', a === cur)); });
